@@ -113,8 +113,8 @@ export default {
 
 <style lang="less" scoped>
 #chongyuechart {
-  width: 30vh;
-  height: 30vh;
+  width: 30vw;
+  height: 30vw;
   position: fixed;
   /* 固定定位，使导航栏脱离文档流 */
   top: 15%;
@@ -126,8 +126,8 @@ export default {
 }
 
 #chongyuecharts {
-  width: 30vh;
-  height: 30vh;
+  width: 30vw;
+  height: 30vw;
   // position: fixed; /* 固定定位，使导航栏脱离文档流 */
   // top: 15%; /* 将导航栏置于页面顶部 */
   // left: 1%;
