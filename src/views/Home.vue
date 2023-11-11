@@ -25,7 +25,7 @@ export default {
       chongyuxian: '20201',
       chongyu_layer: {},
       //天地图url
-      tiandiMapUrl: 'https://t0.tianditu.gov.cn/img_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec_c&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk=a2db82ff5253ddeeec10a6b79592fea7'
+      tiandiMapUrl: 'https://t0.tianditu.gov.cn/img_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=img&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk=a2db82ff5253ddeeec10a6b79592fea7'
     }
   },
   created() {
