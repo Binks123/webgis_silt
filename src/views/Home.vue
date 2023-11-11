@@ -23,10 +23,18 @@ export default {
       // 地图实例对象
       map: null,
       chongyuxian: '20201',
-      chongyu_layer: {}
+      chongyu_layer: {},
+      //天地图url
+      tiandiMapUrl: 'https://t0.tianditu.gov.cn/img_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec_c&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk=a2db82ff5253ddeeec10a6b79592fea7'
     }
   },
   created() {
+    bus.$on('sendTiandiMapUrl', val => {
+      this.tiandiMapUrl = val
+      this.map.dispose();
+      this.initMap()
+    })
+
     bus.$on('shareYear', val => {
       this.chongyuxian = val + '1'
       if (this.chongyuxian == '20191') {
@@ -68,6 +76,7 @@ export default {
     })
   },
   mounted() {
+
     // 窗口拖拉，更新地图大小
     // window.addEventListener('resize', () => {
     //   if (this.map) {
@@ -78,6 +87,10 @@ export default {
       this.initMap()
     })
   },
+  updated() {
+    this.initMap()
+    console.log(11)
+  },
   methods: {
     // 加载地图
     initMap() {
@@ -85,7 +98,7 @@ export default {
       // 使用 ol.source.XYZ 加载切片，并将获取的数据初始化一个切片图层 ol.layer.Tile：
       // 天地图底图
       var source = new XYZ({
-        url: 'https://t0.tianditu.gov.cn/img_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=img&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk=a2db82ff5253ddeeec10a6b79592fea7'
+        url: this.tiandiMapUrl
       })
       var tileLayer = new TileLayer({
         title: '天地图',
@@ -99,7 +112,6 @@ export default {
         title: '标注图层',
         source: sourceMark
       })
-
 
       this.map = new Map({
         target: 'baseMap', // 地图容器 对应id

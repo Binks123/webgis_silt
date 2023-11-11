@@ -4,14 +4,12 @@
       background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
       <router-link to="/slider"><el-menu-item index="1">冲淤量展示</el-menu-item></router-link>
       <el-submenu index="2">
-        <template slot="title">分析工具(开发中)</template>
-        <el-menu-item index="2-1">冲淤量查询</el-menu-item>
-        <el-menu-item index="2-2">导出地图</el-menu-item>
+        <template slot="title">分析工具</template>
         <el-submenu index="2-4">
           <template slot="title">切换底图</template>
-          <el-menu-item index="2-4-1">瓦片</el-menu-item>
-          <el-menu-item index="2-4-2">影像</el-menu-item>
-          <el-menu-item index="2-4-3">地形</el-menu-item>
+          <el-menu-item index="2-4-1" @click="changed_vec">瓦片</el-menu-item>
+          <el-menu-item index="2-4-2" @click="changed_img">影像</el-menu-item>
+          <el-menu-item index="2-4-3" @click="changed_ter">地形</el-menu-item>
         </el-submenu>
       </el-submenu>
     </el-menu>
@@ -28,18 +26,33 @@ export default {
     return {
       activeIndex: '1',
       activeIndex2: '1',
+      tiandiMapUrl: ''
     };
   },
   created() {
 
   },
   mounted() {
+
   },
 
   methods: {
     handleSelect(key, keyPath) {
       // console.log(key, keyPath);
     },
+    changed_vec() {
+      this.tiandiMapUrl = 'https://t0.tianditu.gov.cn/vec_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk=a2db82ff5253ddeeec10a6b79592fea7'
+      bus.$emit('sendTiandiMapUrl', this.tiandiMapUrl)
+    },
+    changed_img() {
+      this.tiandiMapUrl = 'https://t0.tianditu.gov.cn/img_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=img&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk=a2db82ff5253ddeeec10a6b79592fea7'
+      bus.$emit('sendTiandiMapUrl', this.tiandiMapUrl)
+    },
+    changed_ter() {
+      this.tiandiMapUrl = 'https://t0.tianditu.gov.cn/ter_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=ter&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk=a2db82ff5253ddeeec10a6b79592fea7'
+      bus.$emit('sendTiandiMapUrl', this.tiandiMapUrl)
+    }
+
   },
 };
 </script>
